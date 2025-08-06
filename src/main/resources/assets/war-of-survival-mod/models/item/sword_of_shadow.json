@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "war-of-survival-mod:item/sword_of_shadow"
+  }
+}
