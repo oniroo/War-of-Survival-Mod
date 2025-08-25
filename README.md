@@ -4,20 +4,20 @@
 
 ```bash
 DragonHeist99/
-├── build.gradle.kts           // Gradle 빌드 스크립트 (Kotlin DSL)
-├── settings.gradle.kts        // 프로젝트 설정 파일
-├── gradle.properties          // Gradle 속성 설정
+├── build.gradle.kts           # Gradle 빌드 스크립트 (Kotlin DSL)
+├── settings.gradle.kts        # 프로젝트 설정 파일
+├── gradle.properties          # Gradle 속성 설정
 ├── src/
 │   └── 📁 main/
-│       ├── 📁 resources/          // 리소스 파일 (설정 및 플러그인 정의)
-│       │   ├── 📄 plugin.yml      // 플러그인 메타 정보
-│       │   └── 📄 config.yml      // 사용자 정의 설정
+│       ├── 📁 resources/          # 리소스 파일 (설정 및 플러그인 정의)
+│       │   ├── 📄 plugin.yml      # 플러그인 메타 정보
+│       │   └── 📄 config.yml      # 사용자 정의 설정
 │       └── 📁 kotlin/
 │           └── 📁 com.github.oniroo/
-│               ├── 📄 DragonHeist99.kt       // 메인 클래스
+│               ├── 📄 DragonHeist99.kt       # 메인 클래스
 │               ├── 📁 model/
-│               │   └── 📄 State.kt           // 게임 상태 모델
-│               ├── 📁 service/               // 핵심 서비스 로직
+│               │   └── 📄 State.kt           # 게임 상태 모델
+│               ├── 📁 service/               # 핵심 서비스 로직
 │               │   ├── 📄 BorderService.kt
 │               │   ├── 📄 GameClock.kt
 │               │   ├── 📄 EggService.kt
@@ -28,7 +28,7 @@ DragonHeist99/
 │               │   ├── 📄 XpService.kt
 │               │   └── 📄 RecipeService.kt
 │               └── 📁 util/
-│                   └── 📄 Stores.kt          // 유틸리티 및 저장소 관련 코드
+│                   └── 📄 Stores.kt          # 유틸리티 및 저장소 관련 코드
 ```
 
 # Gradle 셋업
@@ -41,7 +41,7 @@ plugins {
     id("io.papermc.paperweight.userdev") version "1.7.1"
 }
 
-group = "com.kh"
+group = "com.github.oniroo"
 version = "1.0.0"
 description = "DragonHeist99 - 99일 드래곤 알 쟁탈전"
 
@@ -71,22 +71,19 @@ tasks {
         kotlinOptions.freeCompilerArgs += "-Xjvm-default=all"
     }
 }
-
 ```
 
 **settings.gradle.kts**
 
 ```kotlin
 rootProject.name = "DragonHeist99"
-
 ```
 
 **gradle.properties**
 
-```
+```groovy
 org.gradle.jvmargs=-Xmx2g
 kotlin.code.style=official
-
 ```
 
 ---
@@ -97,7 +94,7 @@ kotlin.code.style=official
 
 ```yaml
 name: DragonHeist99
-main: com.kh.dragonheist99.DragonHeist99
+main: com.github.oniroo.DragonHeist99
 version: 1.0.0
 api-version: '1.21'
 authors: [ "Koma & Marong" ]
@@ -109,7 +106,6 @@ commands:
 permissions:
   dragonheist.admin:
     default: op
-
 ```
 
 **src/main/resources/config.yml**
@@ -159,7 +155,6 @@ enchant:
   sharpness_max: 10
   protection_max: 7
   anvil_book_apply_cost: 39
-
 ```
 
 ---
@@ -169,11 +164,11 @@ enchant:
 **DragonHeist99.kt**
 
 ```kotlin
-package com.kh.dragonheist99
+package com.github.oniroo
 
-import com.kh.dragonheist99.model.State
-import com.kh.dragonheist99.service.*
-import com.kh.dragonheist99.util.Stores
+import com.github.oniroo.model.State
+import com.github.oniroo.service.*
+import com.github.oniroo.util.Stores
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -263,13 +258,12 @@ class DragonHeist99 : JavaPlugin() {
         // 여기서 서버 락다운/리셋 등 운영 후처리 훅 가능
     }
 }
-
 ```
 
 **model/State.kt**
 
 ```kotlin
-package com.kh.dragonheist99.model
+package com.github.oniroo.model
 
 import java.util.*
 
@@ -288,17 +282,16 @@ data class State(
     val footprints: MutableList<Footprint> = mutableListOf(),
     val tradesToday: MutableMap<String, Int> = mutableMapOf()
 )
-
 ```
 
 **util/Stores.kt**
 
 ```kotlin
-package com.kh.dragonheist99.util
+package com.github.oniroo.util
 
-import com.kh.dragonheist99.DragonHeist99
-import com.kh.dragonheist99.model.Footprint
-import com.kh.dragonheist99.model.State
+import com.github.oniroo.DragonHeist99
+import com.github.oniroo.model.Footprint
+import com.github.oniroo.model.State
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.util.*
@@ -349,7 +342,6 @@ object Stores {
         y.save(file(plugin))
     }
 }
-
 ```
 
 ---
@@ -359,9 +351,9 @@ object Stores {
 **service/BorderService.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
+import com.github.oniroo.DragonHeist99
 import org.bukkit.World
 
 class BorderService(private val plugin: DragonHeist99) {
@@ -380,16 +372,15 @@ class BorderService(private val plugin: DragonHeist99) {
         b.warningDistance = 4
     }
 }
-
 ```
 
 **service/GameClock.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
-import com.kh.dragonheist99.util.Stores
+import com.github.oniroo.DragonHeist99
+import com.github.oniroo.util.Stores
 import org.bukkit.Bukkit
 
 class GameClock(private val plugin: DragonHeist99) {
@@ -428,16 +419,15 @@ class GameClock(private val plugin: DragonHeist99) {
         return this
     }
 }
-
 ```
 
 **service/EggService.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
-import com.kh.dragonheist99.util.Stores
+import com.github.oniroo.DragonHeist99
+import com.github.oniroo.util.Stores
 import org.bukkit.*
 import org.bukkit.entity.EnderDragon
 import org.bukkit.entity.Player
@@ -616,17 +606,16 @@ class EggService(private val plugin: DragonHeist99) : Listener {
         }, 20L * min, 20L * ((min + max) / 2))
     }
 }
-
 ```
 
 **service/FootprintService.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
-import com.kh.dragonheist99.model.Footprint
-import com.kh.dragonheist99.util.Stores
+import com.github.oniroo.DragonHeist99
+import com.github.oniroo.model.Footprint
+import com.github.oniroo.util.Stores
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Particle
@@ -685,15 +674,14 @@ class FootprintService(private val plugin: DragonHeist99) : Listener {
         }
     }
 }
-
 ```
 
 **service/TradeLimiter.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
+import com.github.oniroo.DragonHeist99
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -722,15 +710,14 @@ class TradeLimiter(private val plugin: DragonHeist99) : Listener {
         }
     }
 }
-
 ```
 
 **service/ItemRuleService.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
+import com.github.oniroo.DragonHeist99
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -840,15 +827,14 @@ class ItemRuleService(private val plugin: DragonHeist99) : Listener {
         }
     }
 }
-
 ```
 
 **service/EnchantService.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
+import com.github.oniroo.DragonHeist99
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -896,15 +882,14 @@ class EnchantService(private val plugin: DragonHeist99) : Listener {
         inv.repairCost = plugin.config.getInt("enchant.anvil_book_apply_cost")
     }
 }
-
 ```
 
 **service/XpService.kt**
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
+import com.github.oniroo.DragonHeist99
 import org.bukkit.entity.EnderDragon
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -950,7 +935,6 @@ class XpService(private val plugin: DragonHeist99) : Listener {
         else -> 7 + level * 2
     }
 }
-
 ```
 
 **service/RecipeService.kt**  *(형판 조합/대장간 우회 허용)*
@@ -962,9 +946,9 @@ class XpService(private val plugin: DragonHeist99) : Listener {
 > 
 
 ```kotlin
-package com.kh.dragonheist99.service
+package com.github.oniroo.service
 
-import com.kh.dragonheist99.DragonHeist99
+import com.github.oniroo.DragonHeist99
 import org.bukkit.Keyed
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -1020,7 +1004,6 @@ class RecipeService(private val plugin: DragonHeist99) {
         }
     }
 }
-
 ```
 
 > 참고: 스미싱 템플릿 필드를 완전 생략하는 건 바닐라 레시피 규칙상 불가라서, 위처럼 비바닐라 크래프팅 대체 레시피를 제공하는 방식으로 “템플릿 없이 네더라이트 전환”을 구현했어. (실전에서 완벽하게 스미싱 UI 그대로 쓰고 싶으면 커스텀 컨테이너 GUI 플러그인으로 만드는 게 깔끔)
