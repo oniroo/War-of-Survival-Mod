@@ -1040,9 +1040,8 @@ class RecipeService(private val plugin: DragonHeist99) {
 
 1. 프로젝트 루트에서:
 
-```
+```bash
 ./gradlew build
-
 ```
 
 1. `build/libs/DragonHeist99-1.0.0.jar` 를 Paper 서버 `plugins/`에 넣고 서버 실행.
